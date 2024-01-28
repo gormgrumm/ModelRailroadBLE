@@ -1,0 +1,10 @@
+Flow: 
+
+First screen:
+Press Searh & Connect
+Search and connect to all SignalControllers.
+
+New screen:
+List all SignalControllers
+- Left side: show current aspect
+- Right side: command buttons/images + identify button

@@ -25,6 +25,6 @@ In order to allow other signal-types, the App needs the following modifications:
 Credits
 -------
 The app is highly based on Punchthroughs tutorial at https://punchthrough.com/android-ble-guide/ and their companion starter project obtainable from https://github.com/PunchThrough/ble-starter-android.
-The companion project is licensed under Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0), but with modifcations to my need.
+The companion project is licensed under Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0) - I made modifications to suit my need.
  
 

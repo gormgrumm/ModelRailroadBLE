@@ -1,0 +1,86 @@
+ #include <ArduinoBLE.h>
+
+// setting up uuids of the device type and characteristic
+BLEService ledController("1101");
+BLECharCharacteristic ledSignal("2102", BLERead | BLEWrite | BLENotify); 
+char command;
+ 
+void setup() {
+  // start communication service
+  Serial.begin(9600);
+  // define pins
+  pinMode(2, OUTPUT); // YELLOW
+  pinMode(4, OUTPUT); // RED - halt
+  pinMode(5, OUTPUT); // RED - emergency
+  pinMode(6, OUTPUT); // GREEN
+  pinMode(LED_BUILTIN, OUTPUT);
+  //delay(100);
+  // make a delay until BLE serial is initialized
+  if (!BLE.begin()) 
+  {
+    while (true);
+  }
+  // set the name of the device
+  BLE.setLocalName("SignalController");
+  // set advertised service
+  BLE.setAdvertisedService(ledController);
+  // add characteristic
+  ledController.addCharacteristic(ledSignal);
+  // add servoce
+  BLE.addService(ledController);
+  // start advertising
+  BLE.advertise();
+
+}
+
+// the loop function runs over and over again
+void loop() {
+  BLEDevice central = BLE.central();
+  if (central) {
+    // Serial.println(central.address());
+    digitalWrite(LED_BUILTIN, HIGH);
+    // read characteristic to command
+    while (central.connected()) {
+      command = ledSignal.value(); 
+    }
+  }
+  else {
+    // turn of built-in LED if not connected
+    digitalWrite(LED_BUILTIN, LOW);
+    
+  }
+  // turn LEDs on or off according to command
+  if (command == 'o') {
+      digitalWrite(2, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+      digitalWrite(6, LOW);
+  }
+  if (command == 'h') {
+      digitalWrite(2, LOW);
+      digitalWrite(6, LOW);
+      digitalWrite(4, HIGH);
+      digitalWrite(5, LOW);
+  }
+  if (command == 'l') {
+      digitalWrite(4, LOW);
+      digitalWrite(5, LOW);
+      digitalWrite(2, HIGH);
+      digitalWrite(6, HIGH);
+  }
+  if (command == 'f') {
+      digitalWrite(2, LOW);
+      digitalWrite(5, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(6, HIGH);
+  }
+  if (command == 'n') {
+      digitalWrite(2, LOW);
+      digitalWrite(4, LOW);
+      digitalWrite(6, LOW);
+      digitalWrite(5, HIGH);
+      delay(500);
+      digitalWrite(5, LOW);
+      delay(500);
+  }
+}

@@ -1,4 +1,4 @@
-An Android app to control model railroad signals via Bluetooth Low Energy (BLE) by writing Characteristics to an Arduino Nano BLE acting as a Gatt-server. The arduino code is in another project.
+An Android app to control model railroad signals via Bluetooth Low Energy (BLE) by writing Characteristics to an Arduino Nano BLE acting as a Gatt-server. The arduino code is in the file arduino_sketch
 
 Currently the app only supports a simple "Hauptsignal" with the 4 aspects of Frei/Free, Langsamfart/Slow, Halt/Stop and Not/Emergency-Fail, but it can be expanded with other signals, controlling model building lightning and similar.
 
